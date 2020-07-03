@@ -1,0 +1,24 @@
+dataSources:
+  dsmaster: !!com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://119.3.52.175:3306/dsmaster
+    username: root
+    password: 1qazxsw2#edc
+  dsslave0: !!com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://119.3.52.175:3306/dsslave0
+    username: root
+    password: 1qazxsw2#edc
+  dsslave1: !!com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://119.3.52.175:3306/dsslave1
+    username: root
+    password: 1qazxsw2#edc
+
+masterSlaveRule:
+  name: health_ms
+  masterDataSourceName: dsmaster
+  slaveDataSourceNames: [dsslave0, dsslave1]
+
+props:
+  sql.show: true

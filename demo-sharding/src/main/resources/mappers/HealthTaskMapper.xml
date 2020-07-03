@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tianyilan.shardingsphere.demo.repository.HealthTaskRepository">
+    <resultMap id="healthTaskMap" type="com.tianyilan.shardingsphere.demo.entity.HealthTask">
+        <result column="task_id" property="taskId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="record_id" property="recordId" jdbcType="INTEGER"/>
+        <result column="task_name" property="taskName" jdbcType="VARCHAR"/>
+    </resultMap>
+   
+    <insert id="addEntity" useGeneratedKeys="true" keyProperty="taskId" >
+        INSERT INTO health_task (user_id, record_id, task_name) 
+        VALUES (#{userId,jdbcType=INTEGER}, #{recordId,jdbcType=INTEGER}, 
+        		#{taskName,jdbcType=VARCHAR})
+    </insert>
+
+    <delete id="deleteEntity">
+        DELETE FROM health_task WHERE task_id = #{taskId,jdbcType=INTEGER};
+    </delete>
+
+    <select id="findEntities" resultMap="healthTaskMap">
+        SELECT * FROM health_task;
+    </select>
+    
+</mapper>
