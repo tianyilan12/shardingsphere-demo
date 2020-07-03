@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tianyilan.shardingsphere.demo.repository.HealthLevelRepository">
+    <resultMap id="healthLevelMap" type="com.tianyilan.shardingsphere.demo.entity.HealthLevel">
+        <result column="level_id" property="levelId" jdbcType="INTEGER"/>
+        <result column="level_name" property="levelName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="addEntity">
+        INSERT INTO health_level (level_id, level_name) 
+        VALUES (#{levelId,jdbcType=INTEGER}, #{levelName,jdbcType=VARCHAR})
+    </insert>
+
+    <delete id="deleteEntity">
+        DELETE FROM health_level WHERE level_id = #{levelId,jdbcType=INTEGER};
+    </delete>
+
+    <select id="findEntities" resultMap="healthLevelMap">
+        SELECT * FROM health_level;
+    </select>
+    
+</mapper>

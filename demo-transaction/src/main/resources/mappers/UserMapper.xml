@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tianyilan.shardingsphere.demo.repository.UserRepository">
+    <resultMap id="userMap" type="com.tianyilan.shardingsphere.demo.entity.User">
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="addEntity">
+        INSERT INTO user (user_id, user_name) VALUES (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR})
+    </insert>
+
+    <delete id="deleteEntity">
+        DELETE FROM user WHERE user_id = #{userId,jdbcType=INTEGER};
+    </delete>
+
+    <select id="findEntities" resultMap="userMap">
+        SELECT * FROM user;
+    </select>
+</mapper>

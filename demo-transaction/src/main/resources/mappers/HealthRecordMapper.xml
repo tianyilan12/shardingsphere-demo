@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tianyilan.shardingsphere.demo.repository.HealthRecordRepository">
+    <resultMap id="healthRecordMap" type="com.tianyilan.shardingsphere.demo.entity.HealthRecord">
+        <result column="record_id" property="recordId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="level_id" property="levelId" jdbcType="INTEGER"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="addEntity" useGeneratedKeys="true" keyProperty="recordId" >
+        INSERT INTO health_record (user_id, level_id, remark) 
+        VALUES (#{userId,jdbcType=INTEGER}, #{levelId,jdbcType=INTEGER}, 
+        		#{remark,jdbcType=VARCHAR})
+    </insert>
+
+    <delete id="deleteEntity">
+        DELETE FROM health_record WHERE record_id = #{recordId,jdbcType=INTEGER};
+    </delete>
+
+    <select id="findEntities" resultMap="healthRecordMap">
+        SELECT * FROM health_record;
+    </select>
+    
+</mapper>
